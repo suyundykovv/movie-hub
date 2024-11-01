@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="main_style.css">
+</head>
+
+<body class="body">
+
+    <header class="bg-dark text-white text-center py-3">
+        <h1 class="display-4">Movie Hub</h1>
+        <button class="btn btn-secondary" id="registerBtn">Login in</button>
+        <button class="btn btn-secondary" id="logoutBtn">Logout</button>
+        <button class="btn btn-secondary" id="color_change">Change color</button>
+        <div>
+            <label for="themeToggle">Toggle Day/Night Mode:</label>
+            <input type="checkbox" id="themeToggle">
+          </div>
+        <h1 id="welcome"></h1>
+        <nav class="eventhandle-menu navbar navbar-dark bg-dark justify-content-center">
+            <ul class="navbar-nav d-flex flex-row">
+                <li class="nav-item">
+                    <a class="nav-link" href="#Catalog">Movie List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact Us</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="registrationPopup" class="popup card p-4 mb-5">
+        <div class="card p-4 mb-5">
+            <span class="close-button" id="closeBtn">&times;</span>
+            <h4>Регистрация</h4>
+            <form method="POST" id="registrationForm" novalidate>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Имя пользователя:</label>
+                    <input type="text" class="form-control" id="username1" name="username" required>
+                    <span id="usernameError1" class="error"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="email1" name="email" required>
+                    <span id="emailError1" class="error"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Пароль:</label>
+                    <input type="password" class="form-control" id="password1" name="password" required>
+                    <span id="passwordError1" class="error"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Подтвердите пароль:</label>
+                    <input type="password" class="form-control" id="confirmPassword1" name="confirmPassword" required>
+                    <span id="confirmPasswordError1" class="error"></span>
+                </div>
+            </form>
+            <div id="responseMessage" class="response-message"></div>
+            <button class="btn btn-primary mb-2" id="clear">Очистить все</button>
+            <button type="submit" class="btn btn-primary" id="subbutt">Зарегистрироваться</button>
+        </div>
+        
+        
+    </div>
+
+    <main class="container mt-4">
+        <div class="container mt-3 text-center">
+            <h3>Current Date and Time</h3>
+            <p id="dateTimeDisplay" class="fs-4"></p>
+        </div>
+        <section id="Catalog">
+            <h1 class="text-center mb-4">Top Movies to Watch</h1>
+
+            <!-- This is the 3rd part -->
+            <div class="text-center mb-4">
+                <label for="category-filter">Filter by Category:</label>
+                <select id="category-filter" class="form-select w-auto d-inline-block">
+                    <option value="All">All</option>
+                    <option value="Action">Action</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Sci-Fi">Sci-Fi</option>
+                </select>
+            </div>
+            <!-- 3rd tasks part end here -->
+
+            <div class="row g-4">
+                <div class="col-md-4" data-category="Thriller">
+                    <div class="card h-100">
+                        <img src="inception.jpg" class="card-img-top" alt="Inception">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="Inception.html" class="text-decoration-none">Inception</a>
+                            </h5>
+                            <p class="card-text">Rating: 8.7/10</p>
+                            <p class="card-text">Year: 2010</p>
+                            <p class="card-text">Cobb is a skilled thief, the best of the best in the dangerous art of extraction...</p>
+                        </div>,
+                        <div class="card-footer text-center">
+                            <form action="Inception.html">
+                                <button type="submit" class="btn btn-primary">Watch</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-category="Action", data-category="All">
+                    <div class="card h-100">
+                        <img src="TDK.jpg" class="card-img-top" alt="The Dark Knight">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="The Dark Knight.html" class="text-decoration-none">The Dark Knight</a>
+                            </h5>
+                            <p class="card-text">Rating: 8.5/10</p>
+                            <p class="card-text">Year: 2008</p>
+                            <p class="card-text">Batman raises the stakes in his war on crime...</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <form action="The Dark Knight.html">
+                                <button type="submit" class="btn btn-primary">Watch</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-category="Sci-Fi", data-category="All">
+                    <div class="card h-100">
+                        <img src="Interstellar.jpg" class="card-img-top" alt="Interstellar">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="Interstellar.html" class="text-decoration-none">Interstellar</a>
+                            </h5>
+                            <p class="card-text">Rating: 8.6/10</p>
+                            <p class="card-text">Year: 2014</p>
+                            <p class="card-text">Our time on Earth has come to an end...</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <form action="Interstellar.html">
+                                <button type="submit" class="btn btn-primary">Watch</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="text-center">FAQ</h2>
+            <div class="accordion">
+                <button class="faq-question" onclick="toggleFAQ('faq1')">What are the top movies to watch?</button>
+                <div id="faq1" class="faq-answer">
+                    There are many top movies to watch, but, the top of the top one I'd say is Barbie..
+                </div>
+
+                <button class="faq-question" onclick="toggleFAQ('faq2')">How can I watch movies on Movie Hub?</button>
+                <div id="faq2" class="faq-answer">
+                    You can watch movies by browsing the catalog and selecting a movie to stream.
+                </div>
+
+                <button class="faq-question" onclick="toggleFAQ('faq3')">What movie is good for a Fantastic genre?</button>
+                <div id="faq3" class="faq-answer">
+                    I would rather say Star Wars is the best option in the Fantastic genre.
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-dark text-white text-center py-4">
+        <section id="contact">
+            <p>&copy; 2024 Movie Hub</p>
+            <p>Date - 10.09.2024</p>
+            <p>Group: SE-2325</p>
+            <ul class="list-unstyled">
+                <li>Khairulla Oraz - 231492@astanait.edu.kz</li>
+                <li>Oralbekov Abzal - 231339@astanait.edu.kz</li>
+            </ul>
+        </section>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<script src="main_script.js"></script>
+</html>
