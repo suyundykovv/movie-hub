@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header class="bg-dark text-white text-center py-3">
+        <h1 class="display-4">Movie Hub</h1>
+        <button class="btn btn-secondary" id="registerBtn">Login in</button>
+        <button class="btn btn-secondary" id="logoutBtn">Logout</button>
+        <button class="btn btn-secondary" id="themeButton">Change theme</button>
+        <h1 id="welcome"></h1>
+        <nav class="eventhandle-menu navbar navbar-dark bg-dark justify-content-center">
+            <ul class="navbar-nav d-flex flex-row">
+                <li class="nav-item">
+                    <a class="nav-link" href="info.html">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="main.html">Movie List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact Us</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <header class="bg-dark text-white text-center py-3">
+        <h1 class="display-4" id="movieTitle">Loading...</h1>
+    </header>
+
+    <main class="container mt-4">
+        <h1 class="display-4" id="movieTitle"></h1>
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <img id="moviePoster" src="/images/default-poster.jpg" alt="Poster" class="img-fluid">
+            </div>
+            <div class="col-md-8">
+                <h3>Description</h3>
+                <p id="movieDescription">Loading...</p>
+                <p id="movieRating">Loading...</p>
+                <p id="movieReleaseDate">Release Date: Loading...</p>
+                <p id="movieGenres">Genres: Loading...</p>
+                <h4>Cast</h4>
+                <ul id="movieCast">
+                    
+                </ul>
+            </div>
+        </div>
+
+        <div id="movieTrailer" class="my-4 w-75">
+            <h4>Watch the Trailer</h4>
+            <div id="trailerContainer">
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-4">
+        <section id="contact">
+            <p>&copy; 2024 Movie Hub.</p>
+            <p>Date - 10.09.2024</p>
+            <p>Group: SE-2325</p>
+            <ul class="list-unstyled">
+                <li>Khairulla Oraz - 231492@astanait.edu.kz</li>
+                <li>Oralbekov Abzal - 231339@astanait.edu.kz</li>
+            </ul>
+        </section>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../moviePage.js"></script>
+    <script src="../info.js"></script>
+</body>
+</html>
