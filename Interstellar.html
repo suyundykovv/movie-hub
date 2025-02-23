@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Hub - Interstellar</title>
+    <title>Movie Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <header class="bg-dark text-white text-center py-3">
         <h1 class="display-4">Movie Hub</h1>
         <button class="btn btn-secondary" id="registerBtn">Login in</button>
         <button class="btn btn-secondary" id="logoutBtn">Logout</button>
-        <button class="btn btn-secondary" id="color_change">Change color</button>
-        <div>
-            <label for="themeToggle">Toggle Day/Night Mode:</label>
-            <input type="checkbox" id="themeToggle">
-          </div>
+        <button class="btn btn-secondary" id="themeButton">Change theme</button>
         <h1 id="welcome"></h1>
         <nav class="eventhandle-menu navbar navbar-dark bg-dark justify-content-center">
             <ul class="navbar-nav d-flex flex-row">
+                <li class="nav-item">
+                    <a class="nav-link" href="info.html">Profile</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="main.html">Movie List</a>
                 </li>
@@ -31,101 +28,34 @@
             </ul>
         </nav>
     </header>
-    <div id="registrationPopup" class="popup card p-4 mb-5">
-        <div class="card p-4 mb-5">
-            <span class="close-button" id="closeBtn">&times;</span>
-            <h4>Регистрация</h4>
-            <form method="POST" id="registrationForm" novalidate>
-                <div class="mb-3">
-                    <label for="username" class="form-label">Имя пользователя:</label>
-                    <input type="text" class="form-control" id="username1" name="username" required>
-                    <span id="usernameError1" class="error"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="email" class="form-control" id="email1" name="email" required>
-                    <span id="emailError1" class="error"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Пароль:</label>
-                    <input type="password" class="form-control" id="password1" name="password" required>
-                    <span id="passwordError1" class="error"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="confirmPassword" class="form-label">Подтвердите пароль:</label>
-                    <input type="password" class="form-control" id="confirmPassword1" name="confirmPassword" required>
-                    <span id="confirmPasswordError1" class="error"></span>
-                </div>
-            </form>
-            <button class="btn btn-primary" id="clear">Очистить все</button>
-            <button type="submit" class="btn btn-primary" id="subbutt">Зарегистрироваться</button>
-        </div>
-    </div>
+    <header class="bg-dark text-white text-center py-3">
+        <h1 class="display-4" id="movieTitle">Loading...</h1>
+    </header>
+
     <main class="container mt-4">
+        <h1 class="display-4" id="movieTitle"></h1>
         <div class="row mb-4">
             <div class="col-md-4">
-                <img src="Interstellar.jpg" alt="Interstellar" class="img-fluid">
+                <img id="moviePoster" src="default-poster.jpg" alt="Poster" class="img-fluid">
             </div>
             <div class="col-md-8">
-                <h2>Interstellar</h2>
-                <p><strong>Rating:</strong> 8.6/10</p>
-                <p><strong>Year:</strong> 2014</p>
-                <p>Interstellar is a science fiction film directed by Christopher Nolan. It explores themes of love, sacrifice, and humanity's survival as Earth becomes uninhabitable.</p>
-                <p>The story follows Cooper, a former NASA pilot, on a space mission through a wormhole to find a new planet for humanity.</p>
+                <h3>Description</h3>
+                <p id="movieDescription">Loading...</p>
+                <p id="movieRating">Loading...</p>
+                <p id="movieReleaseDate">Release Date: Loading...</p>
+                <p id="movieGenres">Genres: Loading...</p>
+                <h4>Cast</h4>
+                <ul id="movieCast">
+                    
+                </ul>
             </div>
         </div>
 
-        <h3 class="text-center mb-4">Actors in Leading Roles</h3>
-        <div class="d-flex justify-content-around mb-4">
-            <div class="col-3">
-                <img src="1457046-2440254.jpg" class="img-fluid rounded" >
-                <p>Matthew McConaughey</p>
-            </div>
-            <div class="col-3">
-                <img src="annie.jpg" class="img-fluid rounded">
-                <p>Anne Hathaway</p>
-            </div>
-            <div class="col-3">
-                <img src="david.jpg" class="img-fluid rounded">
-                <p>David Gyasi</p>
-            </div>
-            <div class="col-3">
-                <img src="merph.jpg" class="img-fluid rounded" >
-                <p>Jessica Chastain</p>
+        <div id="movieTrailer" class="my-4 w-75">
+            <h4>Watch the Trailer</h4>
+            <div id="trailerContainer">
             </div>
         </div>
-
-        <div class="text-center my-4">
-            <iframe width="800" height="450" src="https://www.youtube.com/embed/zSWdZVtXT7E" frameborder="0" allowfullscreen></iframe>
-        </div>
-
-        <div class="card p-4 mb-5">
-            <h4>Write your review</h4>
-            <form method="POST" id="myForm">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name:</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
-                    <span id="nameError" class="error"></span> <!-- Поле для ошибки имени -->
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="text" class="form-control" id="email" name="email" required>
-                    <span id="emailError" class="error"></span> <!-- Поле для ошибки email -->
-                </div>
-                <img src="no graded.png" width="25" height="25" class="star" alt="star1"> 
-                <img src="no graded.png" width="25" height="25" class="star" alt="star2"> 
-                <img src="no graded.png" width="25" height="25" class="star" alt="star3"> 
-                <img src="no graded.png" width="25" height="25" class="star" alt="star4"> 
-                <img src="no graded.png" width="25" height="25" class="star" alt="star5">
-                <div class="mb-3">
-                    <label for="comments" class="form-label">Your review:</label>
-                    <textarea id="comments" name="comments" class="form-control" rows="4" required></textarea>
-                    <span id="commentsError" class="error"></span> <!-- Поле для ошибки комментария -->
-                </div>
-            </form>
-            <button class="submit btn btn-primary">Send</button>
-        </div>
-
     </main>
 
     <footer class="bg-dark text-white text-center py-4">
@@ -141,6 +71,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="moviePage.js"></script>
+    <script src="info.js"></script>
 </body>
-<script src="script.js"></script>
 </html>

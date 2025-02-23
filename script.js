@@ -6,18 +6,15 @@ subb.addEventListener('click', function() {
 
   var hasError = false;
 
-  // Сброс сообщений об ошибках
   document.getElementById('nameError').textContent = '';
   document.getElementById('emailError').textContent = '';
   document.getElementById('commentsError').textContent = '';
 
-  // Проверка имени
   if (name.trim() === '') {
     document.getElementById('nameError').textContent = 'Введите ваше имя';
     hasError = true;
   }
 
-  // Проверка email
   if (!validateEmail(email)) {
     document.getElementById('emailError').textContent = 'Введите корректный email';
     hasError = true;
@@ -73,7 +70,6 @@ function checkAuth() {
 }
 checkAuth();
 
-//grade
 const stars = document.querySelectorAll('.star');
 const arr = [1,5,23,5]
 
@@ -93,21 +89,17 @@ function clearStars() {
   });
 }
 
-//clear all inputs
 const clearButt=document.getElementById('clear');
 clearButt.addEventListener('click' , function() {
     document.querySelectorAll('input').forEach(input => input.value = '')
 })
 
-// Работа с темой (день/ночь)
 const themeToggle = document.getElementById('themeToggle');
 const savedTheme = localStorage.getItem('theme') || 'day';
 
-// Установка темы при загрузке
 applyTheme(savedTheme);
 themeToggle.checked = savedTheme === 'night';
 
-// Функция для применения темы
 function applyTheme(theme) {
   if (theme === 'night') {
     document.body.style.backgroundColor = '#4b4b4b';
@@ -118,7 +110,6 @@ function applyTheme(theme) {
   }
 }
 
-// Смена темы при переключении и сохранение в localStorage
 themeToggle.addEventListener('change', () => {
   const newTheme = themeToggle.checked ? 'night' : 'day';
   applyTheme(newTheme);
