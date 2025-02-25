@@ -1,27 +1,44 @@
-const express = require('express');
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import authRoutes from './routes/authRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import movieRoutes from './routes/movieRoutes.js';
+import errorHandler from './middleware/errorMiddleware.js';
+
+// Load environment variables
+dotenv.config();
+
+// Define __dirname in ES module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
-const path = require('path');
-const port = 3000;
+const PORT = process.env.PORT || 5000;
+
+// Middleware
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.static(path.join(__dirname,'public')));
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('Connected to MongoDB');
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch(err => console.error('MongoDB Connection Error:', err));
 
-app.get('/', (req, res)=>{
-    res.sendFile(path.join(__dirname,'public','main.html'))
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/movies', movieRoutes);
+
+// Serve main HTML file
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'main.html'));
 });
-app.post('/register', (req, res) => {
-    const { username, email, password, confirmPassword } = req.body;
 
-    console.log('Данные регистрации:', {
-        username,
-        email,
-        password,
-        confirmPassword
-    });
-
-    res.send('Регистрация прошла успешно');
-});
-
-app.listen(port, () => {
-    console.log(`Сервер работает на http://localhost:${port}`);
-});
+// Error Handler Middleware
+app.use(errorHandler);
