@@ -1,0 +1,3 @@
+MONGO_URI=mongodb+srv://oraz:admin@cluster0.nrfls.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+JWT_SECRET=your_jwt_secret
+PORT=3000
