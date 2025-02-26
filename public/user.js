@@ -42,12 +42,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         const users = await response.json();
         const userTableBody = document.getElementById("userTableBody");
 
-        // Set innerHTML directly instead of using forEach
+        // Generate the user table with editable fields
         userTableBody.innerHTML = users.map(user => `
             <tr>
                 <td>${user._id}</td>
-                <td>${user.username}</td>
-                <td>${user.email}</td>
+                <td><input type="text" class="form-control name-input" value="${user.username}" data-userid="${user._id}"></td>
+                <td><input type="email" class="form-control email-input" value="${user.email}" data-userid="${user._id}"></td>
                 <td>
                     <select class="form-select role-select" data-userid="${user._id}">
                         <option value="user" ${user.role === "user" ? "selected" : ""}>User</option>
@@ -55,21 +55,24 @@ document.addEventListener("DOMContentLoaded", async () => {
                     </select>
                 </td>
                 <td>
+                    <button class="btn btn-primary save-btn" data-userid="${user._id}">Save</button>
                     <button class="btn btn-danger delete-btn" data-userid="${user._id}">Delete</button>
                 </td>
             </tr>
-        `).join(""); // Join array into a single string
+        `).join("");
 
-        // Event listener for role change
-        document.querySelectorAll(".role-select").forEach(select => {
-            select.addEventListener("change", async (event) => {
+        // Event listener for Save buttons
+        document.querySelectorAll(".save-btn").forEach(button => {
+            button.addEventListener("click", async (event) => {
                 const userId = event.target.dataset.userid;
-                const newRole = event.target.value;
-                await updateUserRole(userId, newRole);
+                const nameInput = document.querySelector(`.name-input[data-userid="${userId}"]`).value;
+                const emailInput = document.querySelector(`.email-input[data-userid="${userId}"]`).value;
+                const roleSelect = document.querySelector(`.role-select[data-userid="${userId}"]`).value;
+                await updateUser(userId, nameInput, emailInput, roleSelect);
             });
         });
 
-        // Event listener for delete buttons
+        // Event listener for Delete buttons
         document.querySelectorAll(".delete-btn").forEach(button => {
             button.addEventListener("click", async (event) => {
                 const userId = event.target.dataset.userid;
@@ -83,27 +86,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-
-// Function to update user role
-async function updateUserRole(userId, newRole) {
+// Function to update user details
+async function updateUser(userId, name, email, role) {
     const token = localStorage.getItem("token");
 
     try {
-        const response = await fetch(`/api/users/${userId}/role`, {
+        const response = await fetch(`http://localhost:3000/api/auth/profile/${userId}`, {
             method: "PUT",
             headers: {
                 "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ role: newRole }),
+            body: JSON.stringify({ username: name, email, role }),
         });
 
-        if (!response.ok) throw new Error("Failed to update role");
+        if (!response.ok) throw new Error("Failed to update user");
 
-        alert("User role updated successfully!");
+        alert("User details updated successfully!");
     } catch (error) {
-        console.error("Error updating user role:", error);
-        alert("Error updating role.");
+        console.error("Error updating user:", error);
+        alert("Error updating user.");
     }
 }
 
@@ -114,13 +116,12 @@ async function deleteUser(userId) {
     if (!confirm("Are you sure you want to delete this user?")) return;
 
     try {
-        const response = await fetch(`/api/auth/profile/${userId}`, {
+        const response = await fetch(`http://localhost:3000/api/auth/profile/${userId}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`,
             },
         });
-        
 
         if (!response.ok) throw new Error("Failed to delete user");
 
