@@ -7,9 +7,6 @@ const router = express.Router();
 
 router.get('/profile', verifyToken, getUserProfile);
 router.put('/profile', verifyToken, updateUserProfile);
-<<<<<<< Updated upstream
-=======
 router.delete("/:id", protect, adminOnly, deleteUser); // Только админ может удалять пользователей
->>>>>>> Stashed changes
 
 export default router;
