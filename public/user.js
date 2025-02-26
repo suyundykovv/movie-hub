@@ -8,12 +8,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-                // Redirect non-admin users
-        if (userData.role !== "admin") {
-            alert("Access Denied: Only Admins Can View This Page!");
-            window.location.href = "main.html";
-            return;
-        }
         // Fetch the authenticated user's details
         const authResponse = await fetch("http://localhost:3000/api/auth/me", {
             method: "GET",
@@ -23,16 +17,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             },
         });
 
-        if (!authResponse.ok) {
-            throw new Error("Failed to fetch user data");
-        }
+        if (!authResponse.ok) throw new Error("Failed to fetch user data");
 
         const userData = await authResponse.json();
 
+        // Redirect non-admin users
+        if (userData.role !== "admin") {
+            alert("Access Denied: Only Admins Can View This Page!");
+            window.location.href = "main.html";
+            return;
+        }
 
-
-        // If the user is an admin, fetch all users
-        const response = await fetch("/api/auth/users", {
+        // Fetch all users
+        const response = await fetch("http://localhost:3000/api/auth/users", {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -40,17 +37,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             },
         });
 
-        if (!response.ok) {
-            throw new Error("Failed to fetch users");
-        }
+        if (!response.ok) throw new Error("Failed to fetch users");
 
         const users = await response.json();
         const userTableBody = document.getElementById("userTableBody");
 
-        users.forEach((user) => {
-            const row = document.createElement("tr");
-
-            row.innerHTML = `
+        // Set innerHTML directly instead of using forEach
+        userTableBody.innerHTML = users.map(user => `
+            <tr>
                 <td>${user._id}</td>
                 <td>${user.username}</td>
                 <td>${user.email}</td>
@@ -63,13 +57,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <td>
                     <button class="btn btn-danger delete-btn" data-userid="${user._id}">Delete</button>
                 </td>
-            `;
-
-            userTableBody.appendChild(row);
-        });
+            </tr>
+        `).join(""); // Join array into a single string
 
         // Event listener for role change
-        document.querySelectorAll(".role-select").forEach((select) => {
+        document.querySelectorAll(".role-select").forEach(select => {
             select.addEventListener("change", async (event) => {
                 const userId = event.target.dataset.userid;
                 const newRole = event.target.value;
@@ -78,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         // Event listener for delete buttons
-        document.querySelectorAll(".delete-btn").forEach((button) => {
+        document.querySelectorAll(".delete-btn").forEach(button => {
             button.addEventListener("click", async (event) => {
                 const userId = event.target.dataset.userid;
                 await deleteUser(userId);
@@ -88,9 +80,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (error) {
         console.error("Error:", error);
         alert("Error loading users.");
-        window.location.href = "main.html"; // Redirect on error
     }
 });
+
 
 // Function to update user role
 async function updateUserRole(userId, newRole) {
@@ -122,12 +114,13 @@ async function deleteUser(userId) {
     if (!confirm("Are you sure you want to delete this user?")) return;
 
     try {
-        const response = await fetch(`/api/users/${userId}`, {
+        const response = await fetch(`/api/auth/profile/${userId}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`,
             },
         });
+        
 
         if (!response.ok) throw new Error("Failed to delete user");
 

@@ -4,8 +4,11 @@ import { registerUser, loginUser } from '../controllers/authController.js';
 import { getUserInfo } from "../controllers/authController.js";
 import { verifyToken } from "../middleware/authMiddleware.js";
 import { getAllUsers } from "../controllers/userController.js";
+import { deleteUser } from '../controllers/userController.js';
+
 
 const router = express.Router();
+router.delete("/profile/:id", verifyToken, deleteUser);
 router.get("/me", verifyToken, getUserInfo);
 router.post('/register', registerUser);
 router.post('/login', loginUser);
