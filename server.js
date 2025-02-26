@@ -39,7 +39,7 @@ app.use('/api/resources', resourceRoutes);
 
 // Serve main HTML file
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'main.html'));
+    res.sendFile(path.join(__dirname, 'public', 'auth.html'));
 });
 
 // Error Handler Middleware
