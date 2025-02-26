@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("userFullName").textContent = userData.username;
         document.getElementById("userEmail").textContent = userData.email;
         document.getElementById("userGenre").textContent = userData.favoriteGenre || "Not provided";
-        document.getElementById("userMembership").textContent = userData.membership || "Standard";
+        document.getElementById("userMembership").textContent = userData.role || "Standard";
     } catch (error) {
         console.error("Error fetching user info:", error);
         alert("Error fetching user data, please log in again.");

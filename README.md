@@ -1,49 +1,110 @@
 # Movie Hub
 
-## Project Description
-Movie Hub is a web application designed to provide users with easy access to the latest movies, allowing them to watch any film of their choice. The platform offers a user-friendly and personalized experience by saving user preferences and filtering movies based on genre and type. Our goal is to give people a chance to watch movies for free, without interruptions from ads, so they can enjoy a seamless viewing experience.
+Movie Hub is a web application that allows users to manage their movie library, view movie lists, and maintain user profiles. It includes authentication, role-based access control, and an interactive UI.
 
-## Key Features
+## 🚀 Features
+- User authentication (JWT, bcrypt for password hashing)
+- Role-based access control (Admin, Standard User)
+- Movie list management
+- User profile management
+- API with CRUD operations for movies and users
+- Dark/Light mode toggle
 
-- **User Authentication**: 
-  - Users can log in and log out securely. 
-  - Session data (username) is stored in local storage, allowing the session to persist across page reloads.
-  
-- **User Preferences (Light/Dark Mode)**:
-  - Users can toggle between light and dark mode for a customized viewing experience.
-  - The selected mode is saved in local storage, ensuring it remains even when the user revisits or refreshes the page.
+## 📌 Setup Instructions
 
-- **Movie Filtering**:
-  - Users can filter movies by genre, such as Action, Sci-Fi, and Drama, to quickly find content that matches their interests.
-  - The selected filter setting is saved in local storage, so the application remembers the user’s choice even after the page reloads.
+### Prerequisites
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v16 or later)
+- [MongoDB](https://www.mongodb.com/) (Atlas or local instance)
 
-- **Personalized Experience with Local Storage**:
-  - Movie Hub uses local storage to remember user settings (authentication, theme mode, and filters), allowing users to enjoy a consistent experience across sessions.
+### Installation
+1. **Clone the repository**
+   ```sh
+   git clone https://github.com/yourusername/movie-hub.git
+   cd movie-hub
+   ```
 
-- **Responsive and Polished Design**:
-  - The interface is fully responsive, providing an optimal experience on desktops, tablets, and mobile devices.
-  - Consistent typography, cohesive color schemes, and a clean design ensure a visually appealing and user-friendly experience.
+2. **Install dependencies**
+   ```sh
+   npm install
+   ```
 
-## How User Preferences are Managed
-Movie Hub utilizes the browser's local storage to manage user preferences, ensuring a seamless and personalized experience. Each preference, such as login status, theme mode, and selected movie filter, is saved locally. This allows the application to load user-specific settings automatically whenever they return, without requiring re-login or preference re-selection.
+3. **Create a `.env` file** in the root directory and add:
+   ```env
+   PORT=5000
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_secret_key
+   ```
 
-## How to Use
-1. **Login**: Start by logging in or registering to personalize your experience.
-2. **Switch Mode**: Use the toggle to switch between light and dark modes.
-3. **Filter Movies**: Choose a genre from the filter dropdown to display movies of a specific type.
-4. **Browse Movies**: Explore the catalog and click on a movie to learn more or begin watching.
-5. **Logout**: Click the logout button to end the session.
+4. **Start the server**
+   ```sh
+   npm start
+   ```
 
-## Technologies Used
-- **HTML5** for structuring content.
-- **CSS3** and **Bootstrap** for styling and responsive design.
-- **JavaScript** for interactivity and local storage management.
+The server will run at `http://localhost:3000`.
 
-## Future Improvements
-- Adding more categories and genres for a wider selection of movies.
-- Implementing a movie recommendation system based on user preferences.
-- Adding a "favorites" feature to save movies users wish to watch later.
+## 📡 API Documentation
 
----
+### Authentication
+#### 1️⃣ Register a User
+```http
+POST /api/auth/register
+```
+**Request Body:**
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "securepassword"
+}
+```
 
-Enjoy the free, ad-free experience of watching movies with Movie Hub!
+#### 2️⃣ Login
+```http
+POST /api/auth/login
+```
+**Request Body:**
+```json
+{
+  "email": "john@example.com",
+  "password": "securepassword"
+}
+```
+
+#### 3️⃣ Get User Profile
+```http
+GET /api/users/profile
+```
+**Headers:**
+```json
+{
+  "Authorization": "Bearer <your_token>"
+}
+```
+
+### Movies
+#### 4️⃣ Get All Movies
+```http
+GET /api/movies
+```
+
+#### 5️⃣ Add a New Movie (Admin Only)
+```http
+POST /api/movies
+```
+**Request Body:**
+```json
+{
+  "title": "Inception",
+  "genre": "Sci-Fi",
+  "year": 2010
+}
+```
+
+### Users
+#### 6️⃣ Get All Users (Admin Only)
+```http
+GET /api/users
+```
+
+

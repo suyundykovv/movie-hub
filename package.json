@@ -2,16 +2,11 @@
   "name": "movie-hub",
   "version": "1.0.0",
   "description": "Movie Hub is a web application designed to provide users with easy access to the latest movies, allowing them to watch any film of their choice. The platform offers a user-friendly and personalized experience by saving user preferences and filtering movies based on genre and type. Our goal is to give people a chance to watch movies for free, without interruptions from ads, so they can enjoy a seamless viewing experience.",
-  "main": "info.js",
-  "type": "module",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
