@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import movieRoutes from './routes/movieRoutes.js';
+import resourceRoutes from './routes/resourceRoutes.js';
 import errorHandler from './middleware/errorMiddleware.js';
 
 // Load environment variables
@@ -34,6 +35,7 @@ mongoose.connect(process.env.MONGO_URI)
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/movies', movieRoutes);
+app.use('/api/resources', resourceRoutes);
 
 // Serve main HTML file
 app.get('/', (req, res) => {
