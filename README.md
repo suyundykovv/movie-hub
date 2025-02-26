@@ -20,7 +20,7 @@ Ensure you have the following installed:
 ### Installation
 1. **Clone the repository**
    ```sh
-   git clone https://github.com/yourusername/movie-hub.git
+   git clone https://github.com/suyundykovv/movie-hub.git
    cd movie-hub
    ```
 
@@ -32,7 +32,7 @@ Ensure you have the following installed:
 3. **Create a `.env` file** in the root directory and add:
    ```env
    PORT=5000
-   MONGO_URI=your_mongodb_connection_string
+   MONGO_URI=mongodb+srv://oraz:admin@cluster0.nrfls.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
    JWT_SECRET=your_secret_key
    ```
 
