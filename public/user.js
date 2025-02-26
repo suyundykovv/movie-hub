@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
         // Fetch the authenticated user's details
-        const authResponse = await fetch("http://localhost:3000/api/auth/me", {
+        const authResponse = await fetch("https://movie-hub-69.onrender.com/api/auth/me", {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         // Fetch all users
-        const response = await fetch("http://localhost:3000/api/auth/users", {
+        const response = await fetch("https://movie-hub-69.onrender.com/api/auth/users", {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -91,7 +91,7 @@ async function updateUser(userId, name, email, role) {
     const token = localStorage.getItem("token");
 
     try {
-        const response = await fetch(`http://localhost:3000/api/auth/profile/${userId}`, {
+        const response = await fetch(`https://movie-hub-69.onrender.com/api/auth/profile/${userId}`, {
             method: "PUT",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -116,7 +116,7 @@ async function deleteUser(userId) {
     if (!confirm("Are you sure you want to delete this user?")) return;
 
     try {
-        const response = await fetch(`http://localhost:3000/api/auth/profile/${userId}`, {
+        const response = await fetch(`https://movie-hub-69.onrender.com/api/auth/profile/${userId}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`,
